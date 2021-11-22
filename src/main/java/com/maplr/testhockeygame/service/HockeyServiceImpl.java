@@ -2,12 +2,9 @@ package com.maplr.testhockeygame.service;
 
 import com.maplr.testhockeygame.entity.Player;
 import com.maplr.testhockeygame.entity.Team;
-import com.maplr.testhockeygame.enumeration.Position;
 import com.maplr.testhockeygame.repository.TeamRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -107,12 +104,15 @@ public class HockeyServiceImpl implements HockeyService {
     private Player playerToReturn(Team savedTeam, Long playerNumber) {
         Player finalPlayer = null;
 
-        // On récupère le joueur dans l'équipe
-        for(Player player : savedTeam.getPlayers()) {
-            if(player.getNumber().equals(playerNumber)) {
-                finalPlayer = player;
+        if(savedTeam.getPlayers() != null) {
+            // On récupère le joueur dans l'équipe
+            for(Player player : savedTeam.getPlayers()) {
+                if(player.getNumber().equals(playerNumber)) {
+                    finalPlayer = player;
+                }
             }
         }
+
         return finalPlayer;
     }
 
