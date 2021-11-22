@@ -67,7 +67,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/api/team/2021",
+					"raw": "http://localhost:8080/api/team/addPlayer/2021",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -76,6 +76,7 @@
 					"path": [
 						"api",
 						"team",
+						"addPlayer",
 						"2021"
 					]
 				}

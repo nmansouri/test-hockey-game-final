@@ -12,6 +12,6 @@ public interface TeamRepository extends JpaRepository<Team, Long> {
     /**
      * Récupère une équipe en fonction de l'année en pramètre.
      */
-    @Query("SELECT t FROM Team t WHERE t.year = :year")
+    @Query("SELECT t FROM Team t WHERE t.year = 2019")
     Team findTeamByYear(@Param("year") Long year);
 }

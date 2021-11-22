@@ -6,13 +6,15 @@ import com.maplr.testhockeygame.service.HockeyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+@RestController
+@RequestMapping(path = "/api")
 public class HockeyController  {
 
-    @Autowired
     private final HockeyService hockeyService;
 
 
-    // Construteur
+    // Constructeur
+    @Autowired
     public HockeyController(HockeyService hockeyService) {
         this.hockeyService = hockeyService;
     }
@@ -24,9 +26,8 @@ public class HockeyController  {
      * @param year year
      * @return Team
      */
-    @ResponseBody
-    @RequestMapping(value = "/api/team/{year}", method = RequestMethod.GET)
-    Team getTeamComposition(@PathVariable Long year) {
+    @RequestMapping(produces = "application/json", value = "/team/{year}", method = RequestMethod.GET)
+    public Team getTeamComposition(@PathVariable Long year) {
         return this.hockeyService.getTeamComposition(year);
     }
 
@@ -38,8 +39,9 @@ public class HockeyController  {
      * @param year year
      * @return Player
      */
-    @RequestMapping(value = "/api/team/{year}", method = RequestMethod.POST)
-    Player addPlayer(@RequestBody Player player, @PathVariable Long year){
+    @RequestMapping(produces = "application/json", value = "/team/addPlayer/{year}",
+                    method = {RequestMethod.POST, RequestMethod.GET})
+    public Player addPlayer(@RequestBody Player player, @PathVariable Long year){
         return this.hockeyService.addPlayer(player, year);
     }
 
@@ -50,8 +52,9 @@ public class HockeyController  {
      * @param idPlayer idPlayer
      * @return Player
      */
-    @RequestMapping(value = "/api/player/captain/{idPlayer}", method = RequestMethod.PUT)
-    Player updateCaptain(@PathVariable Long idPlayer){
+    @RequestMapping(produces = "application/json", value = "/player/captain/{idPlayer}",
+                    method = {RequestMethod.PUT, RequestMethod.GET})
+    public Player updateCaptain(@PathVariable Long idPlayer){
         return this.hockeyService.updateCaptain(idPlayer, 2020L);
     }
 }
